@@ -1,0 +1,114 @@
+header h1{
+	text-shadow: 5px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 40px;
+	text-align: center;
+	margin: 25px 10px 10px 10px;
+	float: left;
+	width: 80%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+    background-image: url(../img/kdl.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
+.box{
+	float: right;
+	margin: 3% 3% 3% 0;
+	width: 30%;
+	height: 100%;
+	border: sandybrown 3px solid;
+	box-sizing: border-box;
+}
+
+#indata{
+	margin: 0;
+	width: 70%;
+	height: 40%;
+	resize:	none;
+	color: black;
+    background-color: snow;
+}
+
+textarea::-webkit-input-placeholder {
+	color: black;
+}
+
+#res{
+	margin-top: 20px;
+    width: 70%;
+    height: 40%;
+    color:black;
+    resize: none;
+    background-color: snow;
+}
+
+select{
+	float: right;
+    margin: 15px 80px 10px 15px;
+    width: 30%;
+    height: 50px;
+    color:  snow;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: none;
+    border: papayawhip solid 3px;
+}
+
+.clearfix{
+	clear:both;
+}
+
+#run{
+	margin: 20px 10px 20px 80px;
+    height: auto;
+    float: left;
+    width: auto;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: gray solid 5px;
+    border-radius: 9px;
+    background: none;
+    color: snow;
+}
+
+#run:hover{
+	background-color:greenyellow;
+}
+
+footer{
+	font-family:Georgia, 'Times New Roman', Times, serif;
+    width: 80%;
+    height: 10%;
+    margin: 5% 10% 10% 10%;
+    color: snow;
+}
+
+.CodeMirror {
+    float: left;
+    margin: 3% 3% 3% 3%;
+    width: 60%;
+    height: auto;
+    border: sandybrown 3px solid;
+    box-sizing: border-box;
+    resize: none;
+    font-size: 15px;
+}
+
+.CodeMirror-scroll {
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.CodeMirror-selected {
+    background-color: rgb(15, 228, 210) !important
+}

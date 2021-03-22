@@ -1,0 +1,7 @@
+a.cpp: In function 'int main()':
+a.cpp:6:23: error: expected ';' before 'return'
+  cout << a + b << endl
+                       ^
+                       ;
+  return 0;
+  ~~~~~~                
