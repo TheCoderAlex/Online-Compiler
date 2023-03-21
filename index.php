@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Online Compiler</title>
+	<title>Online Compiler Alpha</title>
 	<link rel="stylesheet" href="./CSS/Style.css">
-    <link rel="shortcut icon" href="./img/网站图标.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/icon.gif" type="image/x-icon">
     <link href="./codemirror/lib/codemirror.css" rel="stylesheet" >
     <script src="./codemirror/lib/codemirror.js"></script>
     <script src="./codemirror/mode/clike/clike.js"></script>
@@ -40,15 +40,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     }else{
         $code = $_POST["code"];
     }
-    file_put_contents('D:\wamp64\www\bin\a.cpp', $code);
+    $choice = $_POST["lang"];
     file_put_contents('D:\wamp64\www\bin\a.in',$indata);
     file_put_contents('D:\wamp64\www\bin\err.out','');
-    exec('cd D:\wamp64\www\bin & g++ a.cpp -o a.exe 2> err.out',$out,$val);
+    if($choice == "Cpp" || $choice == "C"){
+        file_put_contents('D:\wamp64\www\bin\a.cpp', $code);
+        exec('cd D:\wamp64\www\bin & g++ a.cpp -o a.exe 2> err.out',$out,$val);
+    }
+    else if($choice == "Java"){
+        file_put_contents('D:\wamp64\www\bin\Main.java', $code);
+        exec('cd D:\wamp64\www\bin & javac Main.java 2> err.out',$out,$val);
+    }
+    else if($choice == "Python"){
+        file_put_contents('D:\wamp64\www\bin\a.py', $code);
+        $val = 0;
+    }
+
     if ($val == 1){
         $errout = file_get_contents('D:\wamp64\www\bin\err.out');
     }else{
         $stime = microtime(true);
-        exec("cd D:\wamp64\www\bin & a.exe <a.in>a.out",$out,$val2);
+        if($choice == "Cpp" || $choice == "C")
+            exec("cd D:\wamp64\www\bin & a.exe <a.in>a.out",$out,$val2);
+        else if($choice == "Java")
+            exec("cd D:\wamp64\www\bin & java Main <a.in>a.out",$out,$val2);
+        else if($choice == "Python")
+            exec("cd D:\wamp64\www\bin & Python a.py <a.in>a.out",$out,$val2);
         $etime = microtime(true);
         $totaltime = $etime - $stime;
         $res = file_get_contents('D:\wamp64\www\bin\a.out');
@@ -57,9 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 	<header>
-		<h1>Online Compiler</h1>
+		<h1>Online Compiler Alpha</h1>
 	</header>
 
+    <hr>
 	<div class="clearfix"></div>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<main>
@@ -79,6 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 				<select name="lang" id="lang_choose">
 					<option value="Cpp">C++</option>
 					<option value="C">C</option>
+                    			<option value="Python">Python3</option>
+                    			<option value="Java">Java</option>
 				</select>
 				<button type="submit" id="run">Run</button>
 			</div>
@@ -90,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     </form>
 	<footer>
 		<p>
-		Copyright@2021-2022&nbsp;Online&nbsp;Complier&nbsp;All&nbsp;Rights&nbsp;Reserved.
+		Copyright@2021-2022 Online Complier All Rights Reserved.
 		</p>
 	</footer>
 
@@ -117,6 +137,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             styleSelectedText : true
         });
         editor.setSize('60%', '550px');
+    </script>
+    <script>
+    document.forms[0].lang.value = '<?php echo $choice; ?>';
     </script>
 </body>
 </html>
